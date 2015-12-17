@@ -24,5 +24,6 @@
 	<a>事务管理:单元测试com.celloud.service.StudentServiceTest</a><br /><br />
 	<a>mybatis:单元测试com.celloud.dao.impl.StudentDaoTest</a><br /><br />
 	<a>mongodb:单元测试com.celloud.service.StudentServiceTest</a><br /><br />
+	<a href="pjax/index">pjax</a><br /><br />
 </body>
 </html>

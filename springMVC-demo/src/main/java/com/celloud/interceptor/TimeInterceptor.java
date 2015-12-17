@@ -21,7 +21,15 @@ public class TimeInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute("randomBoolean", new Random().nextBoolean());
 		return super.preHandle(request, response, handler);
 	}
-
+	
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		System.out.println("【TimeInterceptor】 request postHandle:" + request.getRequestURI());
+		request.setAttribute("randomInt", new Random().nextInt(100));
+		super.postHandle(request, response, handler, modelAndView);
+	}
+	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
@@ -32,12 +40,5 @@ public class TimeInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute("consumeTime", consumeTime);
 		super.afterCompletion(request, response, handler, ex);
 	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		System.out.println("【TimeInterceptor】 request postHandle:" + request.getRequestURI());
-		request.setAttribute("randomInt", new Random().nextInt(100));
-		super.postHandle(request, response, handler, modelAndView);
-	}
+	
 }

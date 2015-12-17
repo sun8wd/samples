@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.celloud.model.Student;
@@ -16,6 +17,7 @@ import com.celloud.model.User;
 public class ParamsAction {
 	/**
 	 * 基本类型参数传递
+	 * 
 	 * @param num
 	 * @return
 	 */
@@ -25,8 +27,38 @@ public class ParamsAction {
 		mv.addObject("params", num);
 		return mv;
 	}
+
+	// TODO 需要验证
+	@RequestMapping("/list/string")
+	public ModelAndView index(@RequestParam List<String> lists) {
+		ModelAndView mv = new ModelAndView("params");
+		String params = "list:";
+		if (lists != null) {
+			for (String str : lists) {
+				params += str + ",";
+			}
+		}
+		mv.addObject("params", params);
+		return mv;
+	}
+
+	// TODO 需要验证
+	@RequestMapping("/list/student")
+	public ModelAndView index1(@RequestParam("lists[]") List<Student> lists) {
+		ModelAndView mv = new ModelAndView("params");
+		String params = "list:";
+		if (lists != null) {
+			for (Student student : lists) {
+				params += student.getCode() + "," + student.getName() + ";";
+			}
+		}
+		mv.addObject("params", params);
+		return mv;
+	}
+
 	/**
 	 * 包装类型参数传递
+	 * 
 	 * @param num
 	 * @return
 	 */
@@ -36,8 +68,10 @@ public class ParamsAction {
 		mv.addObject("params", num);
 		return mv;
 	}
+
 	/**
 	 * 自定义类型参数传递
+	 * 
 	 * @param student
 	 * @return
 	 */
@@ -50,8 +84,10 @@ public class ParamsAction {
 		mv.addObject("params", params);
 		return mv;
 	}
+
 	/**
 	 * 复合类型参数传递
+	 * 
 	 * @param objectForm
 	 * @return
 	 */
@@ -60,14 +96,16 @@ public class ParamsAction {
 		ModelAndView mv = new ModelAndView("params");
 		String params = "";
 		params += "student.code=" + objectForm.getStudent().getCode() + ",";
-		params += "student.name=" + objectForm.getStudent().getName()+";";
+		params += "student.name=" + objectForm.getStudent().getName() + ";";
 		params += "user.name=" + objectForm.getUser().getName() + ",";
-		params += "user.phone=" + objectForm.getUser().getPhone()+";";
+		params += "user.phone=" + objectForm.getUser().getPhone() + ";";
 		mv.addObject("params", params);
 		return mv;
 	}
+
 	/**
 	 * 数组类型参数传递
+	 * 
 	 * @param arrayForm
 	 * @return
 	 */
@@ -75,7 +113,7 @@ public class ParamsAction {
 	public ModelAndView index(ArrayForm arrayForm) {
 		ModelAndView mv = new ModelAndView("params");
 		String params = "array:";
-		if (arrayForm != null&&arrayForm.getArray()!=null) {
+		if (arrayForm != null && arrayForm.getArray() != null) {
 			for (String str : arrayForm.getArray()) {
 				params += str + ",";
 			}
@@ -83,8 +121,10 @@ public class ParamsAction {
 		mv.addObject("params", params);
 		return mv;
 	}
+
 	/**
 	 * list参数传递
+	 * 
 	 * @param listForm
 	 * @return
 	 */
@@ -100,8 +140,10 @@ public class ParamsAction {
 		mv.addObject("params", params);
 		return mv;
 	}
+
 	/**
 	 * List+自定义类型参数传递
+	 * 
 	 * @param listStudentForm
 	 * @return
 	 */
@@ -117,8 +159,10 @@ public class ParamsAction {
 		mv.addObject("params", params);
 		return mv;
 	}
+
 	/**
 	 * set类型参数传递
+	 * 
 	 * @param setForm
 	 * @return
 	 */
@@ -134,8 +178,10 @@ public class ParamsAction {
 		mv.addObject("params", params);
 		return mv;
 	}
+
 	/**
 	 * map类型参数传递
+	 * 
 	 * @param MapForm
 	 * @return
 	 */
@@ -153,23 +199,29 @@ public class ParamsAction {
 	}
 
 }
+
 class ObjectForm {
 	private User user;
 	private Student student;
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public Student getStudent() {
 		return student;
 	}
+
 	public void setStudent(Student student) {
 		this.student = student;
 	}
 
 }
+
 class ArrayForm {
 	private String[] array;
 
@@ -181,8 +233,8 @@ class ArrayForm {
 		this.array = array;
 	}
 
-
 }
+
 class ListForm {
 	private List<String> list;
 

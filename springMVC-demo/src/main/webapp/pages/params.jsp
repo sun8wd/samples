@@ -25,10 +25,12 @@
 	<a href="params/student?code=100005&name=林永超">自定义类型参数传递：params/student?code=100005&name=林永超</a>
 	<br />
 	<br />
-	<a href="params/object?student.code=100008&student.name=强欲彪&user.name=孙文栋&user.phone=18611361617">复合对象参数传递：params/object?student.code=100008&student.name=强欲彪&user.name=孙文栋&user.phone=18611361617</a>
+	<a
+		href="params/object?student.code=100008&student.name=强欲彪&user.name=孙文栋&user.phone=18611361617">复合对象参数传递：params/object?student.code=100008&student.name=强欲彪&user.name=孙文栋&user.phone=18611361617</a>
 	<br />
 	<br />
-	<a href="objectParam/object?student.code=100009&student.name=董咚咚&user.name=夏文涛&user.phone=18622900982">复合对象参数传递(基于binder)：objectParam/object?student.code=100009&student.name=董咚咚&user.name=夏文涛&user.phone=18622900982</a>
+	<a
+		href="objectParam/object?student.code=100009&student.name=董咚咚&user.name=夏文涛&user.phone=18622900982">复合对象参数传递(基于binder)：objectParam/object?student.code=100009&student.name=董咚咚&user.name=夏文涛&user.phone=18622900982</a>
 	<br />
 	<br />
 	<a href="params/array?array[0]=张三&array[1]=李四&array[2]=王五&array[3]=玛丽">数组类型参数传递：params/array?array[0]=张三&array[1]=李四&array[2]=王五&array[3]=玛丽</a>
@@ -55,6 +57,14 @@
 		href="params/map?map['正义传说']=依韵&map['杀戮传说']=喜儿&map['神化传说']=紫衫&map['不败传说']=小剑&map['无血传说']=暮色">Map类型参数传递：params/map?map['正义传说']=依韵&map['杀戮传说']=喜儿&map['神化传说']=紫衫&map['不败传说']=小剑&map['无血传说']=暮色</a>
 	<br />
 	<br />
-
+	<a href="params/list/string?lists=100001&lists=王&lists=100002&lists=赵">List&lt;Sting&gt;类型参数传递：params/list/string?lists=100001&lists=王&lists=100002&lists=赵</a>
+	<br />
+	<br />
+	<a href="params/list/student?lists[0].code=100001&lists[0].name=王&lists[1].code=100002&lists[1].name=赵">List&lt;Student&gt;类型参数传递：params/list/student?lists[0].code=100001&lists[0].name=王&lists[1].code=100002&lists[1].name=赵</a>
+	<br />
+	<br />
+	<a href="params/list/student?lists=list[0].code=100001&lists.name=王&lists.code=100002&lists.name=赵">List&lt;Student&gt;类型参数传递：params/list/student?lists[0].code=100001&lists[0].name=王&lists[1].code=100002&lists[1].name=赵</a>
+	<br />
+	<br />
 </body>
 </html>

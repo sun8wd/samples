@@ -12,7 +12,7 @@ public class StudentValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return clazz.equals(Student.class);
 	}
-
+	//TODO 不用SpringMVC的标签，如何接收errors
 	@Override
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "student.code.required", "编号不能为空！");
@@ -36,8 +36,8 @@ public class StudentValidator implements Validator {
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "student.name.required", "姓名不能为空！");
 		if (student.getName() != null) {
-			if (student.getName().length() > 20) {
-				errors.rejectValue("name", "student.name.maxLength", "姓名长度不能超过20！");
+			if (student.getName().length() > 8) {
+				errors.rejectValue("name", "student.name.maxLength", "姓名长度不能超过8！");
 			}
 			if (student.getName().length() < 2) {
 				errors.rejectValue("name", "student.name.minLength", "姓名长度不能小于2！");
