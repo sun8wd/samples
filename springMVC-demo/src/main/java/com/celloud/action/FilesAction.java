@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpHeaders;
@@ -29,9 +30,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/files")
 public class FilesAction {
 	private static String upload_path = "/Users/sun8wd/Documents/testUpload";
-
+	public ModelAndView index(HttpSession session){
+	    session.setAttribute("userId", 18);
+	    return new ModelAndView("upload/upload");
+	}
 	@RequestMapping("/upload1")
-	public ModelAndView upload1(@RequestParam("file") CommonsMultipartFile[] files, HttpServletRequest request) {
+	public ModelAndView upload1(@RequestParam("file") CommonsMultipartFile[] files, HttpServletRequest request) throws InterruptedException {
+	    HttpSession session = request.getSession();
+	    Object userId = session.getAttribute("userId");
 		long time = System.currentTimeMillis();
 		for (int i = 0; i < files.length; i++) {
 			System.out.println("fileName---------->" + files[i].getOriginalFilename());
@@ -46,6 +52,8 @@ public class FilesAction {
 				byte[] temp = new byte[1024 * 1024];
 				int length = 0;
 				while ((length = inputStream.read(temp)) > 0) {
+				    Thread.sleep(1000*10*6L);
+				    System.out.println("继续上传。。。");
 					outputStream.write(temp, 0, length);
 				}
 				outputStream.flush();
@@ -58,6 +66,9 @@ public class FilesAction {
 			}
 		}
 		System.out.println(System.currentTimeMillis() - time);
+		System.out.println("开始上传时，获取到的userId："+userId);
+		userId = session.getAttribute("userId");
+		System.out.println("上传结束时，获取到的userId："+userId);
 		// 相同5个文件，执行多次，每次执行时间在80-90毫秒之间
 		return listFiles();
 	}
