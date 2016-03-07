@@ -132,3 +132,6 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+
+# MAC Os
+*.DS_Store
