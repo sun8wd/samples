@@ -2,109 +2,124 @@ package com.celloud.model;
 
 import java.util.Date;
 
-/**
- * 用户实体类-测试
- * 
- * @author <a href="mailto:sunwendong@celloud.cn">sun8wd</a>
- * @date 2015年12月4日上午10:02:38
- * @version Revision: 1.0
- */
 public class User {
-	/**
-	 * 用户编号
-	 */
-	private int id;
-	/**
-	 * 姓名
-	 */
-	private String name;
-	/**
-	 * 地址
-	 */
-	private String address;
-	/**
-	 * 生日
-	 */
-	private Date birthday;
-	/**
-	 * 电话
-	 */
-	private String phone;
-	/**
-	 * 年龄
-	 */
-	private int age;
-	/**
-	 * 身高（cm）
-	 */
-	private double height;
-	/**
-	 * 是否已婚
-	 */
-	private boolean married;
+    private Long id;
 
-	public int getId() {
-		return id;
-	}
+    private String username;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private String password;
 
-	public String getName() {
-		return name;
-	}
+    private String email;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String name;
 
-	public String getAddress() {
-		return address;
-	}
+    private String address;
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    private Date birthday;
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    private String phone;
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    private Integer age;
 
-	public String getPhone() {
-		return phone;
-	}
+    private Double height;
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    private Boolean married;
 
-	public int getAge() {
-		return age;
-	}
+    private Boolean disabled;
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public double getHeight() {
-		return height;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setHeight(double height) {
-		this.height = height;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public boolean isMarried() {
-		return married;
-	}
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
 
-	public void setMarried(boolean married) {
-		this.married = married;
-	}
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public Boolean getMarried() {
+        return married;
+    }
+
+    public void setMarried(Boolean married) {
+        this.married = married;
+    }
+
+    public Boolean getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        this.disabled = disabled;
+    }
 }

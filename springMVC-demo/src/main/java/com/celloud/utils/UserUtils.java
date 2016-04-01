@@ -12,8 +12,8 @@ import java.util.Random;
 import com.celloud.model.User;
 
 public class UserUtils {
-    private static Map<Integer, User> userMap;
-    private static int nextId = 1;
+    private static Map<Long, User> userMap;
+    private static long nextId = 1;
 
     static {
         Random random = new Random();
@@ -40,7 +40,7 @@ public class UserUtils {
         Collections.sort(users, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return o1.getId() - o2.getId();
+                return (int) (o1.getId() - o2.getId());
             }
         });
         return users;
