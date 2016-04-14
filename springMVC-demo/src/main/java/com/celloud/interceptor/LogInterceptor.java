@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.celloud.utils.PrintUtils;
+
 public class LogInterceptor extends HandlerInterceptorAdapter {
 	/**
 	 * preHandle方法是进行处理器拦截用的，顾名思义，该方法将在Controller处理之前进行调用，
@@ -18,7 +20,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("【LogInterceptor】 request preHandle:"+request.getRequestURI());
+		PrintUtils.println("【LogInterceptor】 request preHandle:"+request.getRequestURI());
 		return super.preHandle(request, response, handler);
 	}
 	/**
@@ -35,7 +37,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("【LogInterceptor】 request postHandle:"+request.getRequestURI());
+	    PrintUtils.println("【LogInterceptor】 request postHandle:"+request.getRequestURI());
 		super.postHandle(request, response, handler, modelAndView);
 	}
 
@@ -47,7 +49,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		System.out.println("【LogInterceptor】 request afterCompletion:"+request.getRequestURI());
+	    PrintUtils.println("【LogInterceptor】 request afterCompletion:"+request.getRequestURI());
 		super.afterCompletion(request, response, handler, ex);
 	}
 

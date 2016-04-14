@@ -9,6 +9,8 @@ import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.celloud.utils.PrintUtils;
+
 public class TimeInterceptor extends HandlerInterceptorAdapter {
     private NamedThreadLocal<Long> startTimeThreadLocal = new NamedThreadLocal<Long>("StopWatch-StartTime");
 
@@ -17,7 +19,7 @@ public class TimeInterceptor extends HandlerInterceptorAdapter {
             throws Exception {
         long beginTime = System.currentTimeMillis();// 1、开始时间
         startTimeThreadLocal.set(beginTime);// 线程绑定变量（该数据只有当前请求的线程可见）
-        System.out.println("【TimeInterceptor】 request preHandle:" + request.getRequestURI());
+        PrintUtils.println("【TimeInterceptor】 request preHandle:" + request.getRequestURI());
         Random random = new Random();
         request.setAttribute("randomBoolean", random.nextBoolean());
         return super.preHandle(request, response, handler);
@@ -26,7 +28,7 @@ public class TimeInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
-        System.out.println("【TimeInterceptor】 request postHandle:" + request.getRequestURI());
+        PrintUtils.println("【TimeInterceptor】 request postHandle:" + request.getRequestURI());
         request.setAttribute("randomInt", new Random().nextInt(100));
         super.postHandle(request, response, handler, modelAndView);
     }
@@ -37,7 +39,7 @@ public class TimeInterceptor extends HandlerInterceptorAdapter {
         long endTime = System.currentTimeMillis();// 2、结束时间
         long beginTime = startTimeThreadLocal.get();// 得到线程绑定的局部变量（开始时间）
         long consumeTime = endTime - beginTime;// 3、消耗的时间
-        System.out
+        PrintUtils
                 .println("【TimeInterceptor】 request afterCompletion(" + consumeTime + "ms):" + request.getRequestURI());
         request.setAttribute("consumeTime", consumeTime);
         super.afterCompletion(request, response, handler, ex);

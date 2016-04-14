@@ -62,7 +62,7 @@ public class UserUtils {
         return true;
     }
 
-    public User deleteById(int id) {
+    public User deleteById(long id) {
         return userMap.remove(id);
     }
 

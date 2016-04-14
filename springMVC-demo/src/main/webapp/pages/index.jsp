@@ -36,12 +36,12 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a href="<%=request.getContextPath()%>/logout">
-								<i class="glyphicon glyphicon-log-out"></i> LOGOUT
+								<i class="glyphicon glyphicon-log-out"></i> 退出登录
 							</a>
 						</li>
 						<li>
-							<a href="#">
-								<i class="glyphicon glyphicon-align-left"></i> Another action
+							<a href="<%=request.getContextPath()%>/chat/index">
+								<i class="glyphicon glyphicon-align-left"></i> 聊天室
 							</a>
 						</li>
 						<li>

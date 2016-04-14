@@ -8,16 +8,18 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
+import com.celloud.utils.PrintUtils;
+
 @Aspect
 public class DaoAspect {
 	@Before("execution (* com.celloud.dao.*.*(..))")
 	public void before(JoinPoint point) {
-		System.out.println("【before】 "+point.toLongString());
+	    PrintUtils.println("【before】 "+point.toLongString());
 	}
 
 	@After("execution (* com.celloud.dao.*.*(..))")
 	public void after(JoinPoint point) {
-		System.out.println("【after】 "+point.toLongString());
+	    PrintUtils.println("【after】 "+point.toLongString());
 	}
 
 	@AfterThrowing("execution (* com.celloud.dao.*.*(..))")
