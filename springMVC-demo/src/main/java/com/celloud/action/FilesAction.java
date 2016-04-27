@@ -146,29 +146,21 @@ public class FilesAction {
             chunkFile.getParentFile().mkdirs();
         }
         try {
-            Thread.sleep(1000);
             file.transferTo(chunkFile);
-        } catch (IllegalStateException | IOException | InterruptedException e) {
+        } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
         logger.info("【{}】 chunk={}\t", name, chunk, getLoaded(fileName + ext));
         if (chunks == null || chunks == 0 || chunk == chunks - 1) {
             logger.info("文件上传完成【{}】", name);
-            File f = new File(chunkFile.getParentFile().getAbsolutePath());
-            f = new File(f.getParentFile().getAbsolutePath() + "/" + name);
-            if (f.exists()) {
-                f.delete();
-            }
-            for (int i = 0; i < chunks; i++) {
-                try {
-                    FileUtils.writeByteArrayToFile(f, FileUtils.readFileToByteArray(
-                            new File(chunkFile.getParentFile().getAbsolutePath() + "/" + i)), true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            File tempFile = chunkFile.getParentFile();
+            File f = new File(tempFile.getParentFile().getAbsolutePath() + "/" + name);
             try {
-                FileUtils.forceDelete(new File(chunkFile.getParentFile().getAbsolutePath()));
+                for (int i = 0; i < chunks; i++) {
+                    FileUtils.writeByteArrayToFile(f,
+                            FileUtils.readFileToByteArray(new File(tempFile.getAbsolutePath() + "/" + i)), i != 0);
+                }
+                FileUtils.forceDelete(tempFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -190,16 +182,15 @@ public class FilesAction {
     public long getLoaded(String filename) {
         File file = new File(upload_path + "/" + filename);
         long loaded = 0L;
-        if (file.exists() && !file.isFile()) {
-            int i = 0;
-            while (true) {
-                File f = new File(upload_path + "/" + filename + "/" + i);
-                if (!f.exists()) {
-                    break;
-                }
-                loaded += f.length();
-                i++;
+        if (!file.exists() || file.isFile()) {
+            return loaded;
+        }
+        for (int i = 0; i <= file.listFiles().length; i++) {
+            File f = new File(upload_path + "/" + filename + "/" + i);
+            if (!f.exists()) {
+                break;
             }
+            loaded += f.length();
         }
         return loaded;
     }
