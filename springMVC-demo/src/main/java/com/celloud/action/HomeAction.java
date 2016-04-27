@@ -67,7 +67,7 @@ public class HomeAction {
             System.out.println(msg);
         }
         if (subject.isAuthenticated()) {
-            return "redirect:/chat/index";
+            return "redirect:/index";
         } else {
             return "/login";
         }

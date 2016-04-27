@@ -12,52 +12,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/plugin/bootstrap/css/bootstrap-theme.min.css">
 </head>
 <body>
-	<div class="navbar navbar-default navbar-static-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">SpringMVC-demo</a>
-			</div>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						<i class="glyphicon glyphicon-user"></i>
-						<shiro:principal />
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="<%=request.getContextPath()%>/logout">
-								<i class="glyphicon glyphicon-log-out"></i> LOGOUT
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="glyphicon glyphicon-align-left"></i> Another action
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="glyphicon glyphicon-align-center"></i> Something else here
-							</a>
-						</li>
-						<li role="separator" class="divider"></li>
-						<li>
-							<a href="#">
-								<i class="glyphicon glyphicon-align-right"></i> Separated link
-							</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<jsp:include page="../navbar.jsp">
+		<jsp:param value="chat" name="nav" />
+	</jsp:include>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">
@@ -85,8 +42,7 @@
 							</div>
 							<div class="col-md-2" style="height: 50px;">
 								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-default btn-lg" onclick="messageUtils.sendMessage()">发送
-									</button>
+									<button type="button" class="btn btn-default btn-lg" onclick="messageUtils.sendMessage()">发送</button>
 									<button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">
 										<span class="caret"></span>
