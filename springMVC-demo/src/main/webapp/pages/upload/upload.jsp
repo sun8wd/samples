@@ -26,9 +26,9 @@
 								<tr>
 									<th>文件名</th>
 									<th>MD5</th>
-									<th width="10%;" align="right">进度</th>
-									<th width="10%;" align="right">大小</th>
-									<th width="10%;" align="right">速度</th>
+									<th width="10%;" class="text-right">进度</th>
+									<th width="10%;" class="text-right">大小</th>
+									<th width="10%;" class="text-right">速度</th>
 								</tr>
 							</thead>
 							<tbody id="uploader">

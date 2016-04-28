@@ -8,6 +8,7 @@ $(document).ready(function() {
 		// Specify what files to browse for
 		filters : {
 			max_file_size : '3gb',
+			prevent_duplicates : true, //不允许选取重复文件
 			mime_types : [ {
 				title : "bam",
 				extensions : "bam"
@@ -87,7 +88,6 @@ $(document).ready(function() {
 			$("#uploader").append($fileDom);
 			var params = {"size":item.size,"lastModifiedDate":item.lastModifiedDate,"name":item.name};
 			$.get("/springMVC-demo/files/checkBreakpoints",params,function(data){
-				console.log(data);
 				if(data.loaded){
 					item.loaded = data.loaded;
 				}
@@ -97,7 +97,7 @@ $(document).ready(function() {
 	$("#startUpload").click(function(){
 		uploader.start();
 	});
-	uploader.bind("ChunkUploaded", function(uploader, file, response) {
+	uploader.bind("FileUploaded", function(uploader, file, response) {
 		var res = JSON.parse(response.response);
 		if(res.md5){
 			$("#" + file.id +" .md5").html(res.md5);
@@ -105,6 +105,11 @@ $(document).ready(function() {
 	});
 	uploader.bind("BeforeUpload", function(uploader, file) {
 		 uploader.setOption("multipart_params",{"size":file.size,"lastModifiedDate":file.lastModifiedDate});
+	});
+	uploader.bind("Error", function(uploader, error) {
+		 if(error.code=='-602'){
+			 alert("当前队列已存在文件【"+error.file.name+"】，请勿重复添加！");
+		 }
 	});
 	
 });
