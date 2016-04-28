@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>upload</title>
+<title>springMVC-demo 文件上传</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/plugin/bootstrap/css/bootstrap.min.css">
 <!-- Optional theme -->
@@ -19,11 +19,11 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
-					<div class="panel-heading">plupload断点续传</div>
-					<div class="panel-body">
-					   请在/user.home/Documents/testUpload下查看运行结果
+					<div class="panel-heading">
+						<h4>Plupload&nbsp;&nbsp;断点续传</h4>
 					</div>
-					<div style="min-height: 200px;">
+					<div class="panel-body">请在/user.home/Documents/testUpload下查看运行结果</div>
+					<div style="min-height: 200px; border-top: solid #ddd 1px;">
 						<table class="table">
 							<thead>
 								<tr>
