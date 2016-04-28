@@ -19,7 +19,10 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
-					<div class="panel-heading">plupload</div>
+					<div class="panel-heading">plupload断点续传</div>
+					<div class="panel-body">
+					   请在/user.home/Documents/testUpload下查看运行结果
+					</div>
 					<div style="min-height: 200px;">
 						<table class="table">
 							<thead>

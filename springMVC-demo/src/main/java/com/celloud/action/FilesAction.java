@@ -38,7 +38,8 @@ import com.celloud.utils.MD5Util;
 @Controller
 @RequestMapping("/files")
 public class FilesAction {
-    private static String upload_path = "/Users/sun8wd/Documents/testUpload";
+    private static String upload_path = System.getProperty("user.home") + File.separatorChar + "Documents"
+            + File.separatorChar + "testUpload";
     private static Logger logger = LoggerFactory.getLogger(FilesAction.class);
 
     @RequestMapping()
@@ -141,7 +142,7 @@ public class FilesAction {
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(lastModifiedDate));
         String fileName = MD5Util.getMD5(name + "" + lastModifiedDate.getTime() + "" + size);
         String ext = name.substring(name.lastIndexOf("."));
-        File chunkFile = new File(upload_path + "/" + fileName + ext + "/" + chunk);
+        File chunkFile = new File(upload_path + File.separatorChar + fileName + ext + File.separatorChar + chunk);
         if (!chunkFile.exists()) {
             chunkFile.getParentFile().mkdirs();
         }
@@ -154,15 +155,15 @@ public class FilesAction {
         if (chunks == null || chunks == 0 || chunk == chunks - 1) {
             logger.info("文件上传完成【{}】", name);
             File tempFile = chunkFile.getParentFile();
-            File f = new File(tempFile.getParentFile().getAbsolutePath() + "/" + name);
+            File f = new File(tempFile.getParentFile().getAbsolutePath() + File.separatorChar + name);
             try {
                 for (int i = 0; i < chunks; i++) {
-                    FileUtils.writeByteArrayToFile(f,
-                            FileUtils.readFileToByteArray(new File(tempFile.getAbsolutePath() + "/" + i)), i != 0);
+                    FileUtils.writeByteArrayToFile(f, FileUtils.readFileToByteArray(
+                            new File(tempFile.getAbsolutePath() + File.separatorChar + i)), i != 0);
                 }
                 FileUtils.forceDelete(tempFile);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("合并文件失败！", e);
             }
             result.put("md5", MD5Util.getFileMD5(f));
         }
@@ -180,13 +181,13 @@ public class FilesAction {
     }
 
     public long getLoaded(String filename) {
-        File file = new File(upload_path + "/" + filename);
+        File file = new File(upload_path + File.separatorChar + filename);
         long loaded = 0L;
         if (!file.exists() || file.isFile()) {
             return loaded;
         }
         for (int i = 0; i <= file.listFiles().length; i++) {
-            File f = new File(upload_path + "/" + filename + "/" + i);
+            File f = new File(upload_path + +File.separatorChar + filename + File.separatorChar + i);
             if (!f.exists()) {
                 break;
             }
