@@ -151,13 +151,13 @@ public class FilesAction {
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
-        logger.info("【{}】 chunk={}\t", name, chunk, getLoaded(fileName + ext));
+        logger.info("【{}】 chunk={}\t{}", name, chunk, getLoaded(fileName + ext));
         if (chunks == null || chunks == 0 || chunk == chunks - 1) {
             logger.info("文件上传完成【{}】", name);
             File tempFile = chunkFile.getParentFile();
             File f = new File(tempFile.getParentFile().getAbsolutePath() + File.separatorChar + name);
             try {
-                for (int i = 0; i < chunks; i++) {
+                for (int i = 0; i < chunks; i++) {// 有可能是性能瓶颈
                     FileUtils.writeByteArrayToFile(f, FileUtils.readFileToByteArray(
                             new File(tempFile.getAbsolutePath() + File.separatorChar + i)), i != 0);
                 }
@@ -182,12 +182,13 @@ public class FilesAction {
 
     public long getLoaded(String filename) {
         File file = new File(upload_path + File.separatorChar + filename);
+        logger.info(file.getAbsolutePath());
         long loaded = 0L;
         if (!file.exists() || file.isFile()) {
             return loaded;
         }
         for (int i = 0; i <= file.listFiles().length; i++) {
-            File f = new File(upload_path + +File.separatorChar + filename + File.separatorChar + i);
+            File f = new File(upload_path + File.separatorChar + filename + File.separatorChar + i);
             if (!f.exists()) {
                 break;
             }

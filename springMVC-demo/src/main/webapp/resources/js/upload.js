@@ -90,9 +90,10 @@ $(document).ready(function() {
 			$.get("/springMVC-demo/files/checkBreakpoints",params,function(data){
 				if(data.loaded){
 					item.loaded = data.loaded;
+					$("#" + item.id +" .percent").html((item.loaded/item.size).toFixed(2)*100+"%");
 				}
 			});
-		});
+		}); 
 	});
 	$("#startUpload").click(function(){
 		uploader.start();
