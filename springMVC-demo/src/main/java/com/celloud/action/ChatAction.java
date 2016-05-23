@@ -13,8 +13,8 @@ import com.celloud.websocket.SystemWebSocketHandler;
 
 @Controller
 @RequestMapping("chat")
-public class ChatController {
-    @RequestMapping("index")
+public class ChatAction {
+    @RequestMapping("")
     public String index() {
         return "chat/index";
     }

@@ -2,49 +2,21 @@ $(document).ready(function() {
 	var uploader = new plupload.Uploader({
 		runtimes : 'html5,flash,silverlight,html4',
 		browse_button : 'uploadBtn',
-		url : "/springMVC-demo/files/upload",
+		url : contextPath+"/files/upload",
 		// Maximum file size
 		chunk_size : '1mb',
 		// Specify what files to browse for
 		filters : {
 			max_file_size : '3gb',
 			prevent_duplicates : true, //不允许选取重复文件
-			mime_types : [ {
-				title : "bam",
-				extensions : "bam"
-			}, {
-				title : "ab1",
-				extensions : "ab1"
-			}, {
-				title : "abi",
-				extensions : "abi"
-			}, {
-				title : "fasta",
-				extensions : "fasta"
-			}, {
-				title : "fastq",
-				extensions : "fastq"
-			}, {
-				title : "tsv",
-				extensions : "tsv"
-			}, {
-				title : "gz",
-				extensions : "gz"
-			}, {
-				title : "pdf",
-				extensions : "pdf"
-			},
-			{
-				title : "dmg",
-				extensions : "dmg"
-			}]
+			mime_types : [ ]
 		},
 		max_retries : 5,
 		multiple_queues : true,
 		// Flash settings
-		flash_swf_url : '/plupload-2.1.8/js/Moxie.swf',
+		flash_swf_url : contextPath+'/plugin/plupload-2.1.8/js/Moxie.swf',
 		// Silverlight settings
-		silverlight_xap_url : '/plupload-2.1.8/js/Moxie.xap'
+		silverlight_xap_url : contextPath+'/plugin/plupload-2.1.8/js/Moxie.xap'
 	});
 	uploader.init();
 	uploader.bind("QueueChanged", function(up) {
@@ -54,6 +26,9 @@ $(document).ready(function() {
 		$("#" + file.id +" .spead").html(getSpead(uploader.total.bytesPerSec));
 	});
 	function getSize(fileSize){
+		if(!fileSize){
+			return "";
+		}
 		var unit = "b";
 		if(fileSize > 1000){
 			fileSize= fileSize / 1000;
@@ -82,7 +57,7 @@ $(document).ready(function() {
 			var $fileDom = $('<tr id="' + item.id + '"></tr>');
 			$fileDom.append($('<td class="filename">' + item.name + '</td>'));
 			$fileDom.append($('<td class="md5">---</td>'));
-			$fileDom.append($('<td class="percent" align="right">0%</td>'));
+			$fileDom.append($('<td class="percent" align="right"></td>'));
 			$fileDom.append($('<td class="size" align="right">'+getSize(item.size)+'</td>'));
 			$fileDom.append($('<td class="spead" align="right">---</td>'));
 			$("#uploader").append($fileDom);
@@ -105,7 +80,7 @@ $(document).ready(function() {
 		}
 	});
 	uploader.bind("BeforeUpload", function(uploader, file) {
-		 uploader.setOption("multipart_params",{"size":file.size,"lastModifiedDate":file.lastModifiedDate});
+		 uploader.setOption("multipart_params",{"size":file.size,"lastModifiedDate":new Date(file.lastModifiedDate)});
 	});
 	uploader.bind("Error", function(uploader, error) {
 		 if(error.code=='-602'){

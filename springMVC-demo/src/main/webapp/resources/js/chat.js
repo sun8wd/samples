@@ -14,7 +14,7 @@ var messageUtils = (function(messageUtils) {
 	}
 	var maxId = 0;
 	self.getMessages = function() {
-		$.get("chats?id=" + maxId, function(data) {
+		$.get("chat/chats?id=" + maxId, function(data) {
 			$.each(data, function(index, item) {
 				var date = new Date(parseInt(item.date)).toLocaleString();
 				$("#chats").append(
@@ -29,7 +29,7 @@ var messageUtils = (function(messageUtils) {
 		});
 	};
 	self.getUsers = function() {
-		$.get("users", function(data) {
+		$.get("chat/users", function(data) {
 			$("#users").html("");
 			$.each(data, function(index, item) {
 				$("#users").append(

@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="jsp_layout.tld" prefix="layout"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	boolean isPjax = request.getHeader("X-PJAX") != null;
+    //boolean isPjax = request.getHeader("X-PJAX") != null;
+    boolean isPjax = request.getHeader("COFFCE-PJAX") != null;
 %>
 <layout:override name="content" pjax="<%=isPjax%>">
-	<h2>学生列表---isPjax:<%=isPjax %></h2>
+	<h2>
+		学生列表---isPjax:<%=isPjax%></h2>
 	<table class="table table-bordered  table-hover">
 		<thead>
 			<tr>
@@ -20,7 +21,7 @@
 		</thead>
 		<tbody>
 			<%
-				for (int i = 1; i <= 15; i++) {
+			    for (int i = 1; i <= 15; i++) {
 			%>
 			<tr>
 				<td><%=i%></td>
@@ -34,7 +35,7 @@
 				</td>
 			</tr>
 			<%
-				}
+			    }
 			%>
 		</tbody>
 	</table>

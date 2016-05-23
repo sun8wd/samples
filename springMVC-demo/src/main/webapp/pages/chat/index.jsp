@@ -65,6 +65,6 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="<%=request.getContextPath()%>/plugin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/sockjs-1.0.0.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/test.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/chat.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
-<!DOCTYPE html">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -96,10 +96,12 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	   window.contextPath = '<%=request.getContextPath()%>';
+	</script>
 	<script src="<%=request.getContextPath()%>/js/jquery-1.11.3.min.js"></script>
 	<script src="<%=request.getContextPath()%>/plugin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath()%>/plugin/plupload-2.1.8/js/plupload.full.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/upload.js"></script>
-</body>
 </body>
 </html>
