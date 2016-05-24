@@ -155,9 +155,10 @@ public class FilesAction {
         if (chunks == null || chunks == 0 || chunk == chunks - 1) {
             logger.info("文件上传完成【{}】", name);
             File tempFile = chunkFile.getParentFile();
+            int total = chunks == null ? 0 : chunks.intValue();
             File f = new File(tempFile.getParentFile().getAbsolutePath() + File.separatorChar + name);
             try {
-                for (int i = 0; i < chunks; i++) {// 有可能是性能瓶颈
+                for (int i = 0; i < total; i++) {// 有可能是性能瓶颈
                     FileUtils.writeByteArrayToFile(f, FileUtils.readFileToByteArray(
                             new File(tempFile.getAbsolutePath() + File.separatorChar + i)), i != 0);
                 }
@@ -187,7 +188,11 @@ public class FilesAction {
         if (!file.exists() || file.isFile()) {
             return loaded;
         }
-        for (int i = 0; i <= file.listFiles().length; i++) {
+        File[] files = file.listFiles();
+        if (files == null || files.length == 0) {
+            return loaded;
+        }
+        for (int i = 0; i <= files.length; i++) {
             File f = new File(upload_path + File.separatorChar + filename + File.separatorChar + i);
             if (!f.exists()) {
                 break;
