@@ -168,9 +168,9 @@
 				/api/** = anon
 				/login/** = anon
 				/logout/** = anon
-				/pages/** = authc,perms[noone:canbe]
-				/params/** = roles[admin]
-				/** = user
+				/pages/** = anon
+				/params/** = anon
+				/** = anon
 			</value>
 		</property>
 	</bean>

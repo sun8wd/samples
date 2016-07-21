@@ -55,7 +55,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<welcome-file-list>
-		<welcome-file>pages/home.jsp</welcome-file>
+		<welcome-file>pages/loading.jsp</welcome-file>
 	</welcome-file-list>
 	<session-config>
 		<session-timeout>60</session-timeout>

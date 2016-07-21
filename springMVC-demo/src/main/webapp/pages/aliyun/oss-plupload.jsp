@@ -12,6 +12,9 @@
 <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.3.0.min.js"></script>
 </head>
 <body>
+	<%
+	    out.println(request.getLocalAddr() + " : " + request.getLocalPort());
+	%>
 	<jsp:include page="../navbar.jsp">
 		<jsp:param value="alioss_plupload" name="nav" />
 	</jsp:include>
@@ -21,7 +24,7 @@
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<div class="panel-heading">
-						<h4>阿里云OSS  --  plupload文件上传</h4>
+						<h4>阿里云OSS -- plupload文件上传</h4>
 					</div>
 					<div style="min-height: 400px;">
 						<table class="table">
@@ -92,7 +95,8 @@
 	</div>
 	<!-- /.modal -->
 	<script type="text/javascript">
-       window.contextPath = '<%=request.getContextPath()%>';
+       window.contextPath = '<%=request.getContextPath()%>
+		';
 	</script>
 	<script src="<%=request.getContextPath()%>/js/jquery-1.11.3.min.js"></script>
 	<script src="<%=request.getContextPath()%>/plugin/bootstrap/js/bootstrap.min.js"></script>

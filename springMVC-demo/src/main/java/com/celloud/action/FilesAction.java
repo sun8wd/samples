@@ -44,7 +44,6 @@ public class FilesAction {
 
     @RequestMapping()
     public ModelAndView index(HttpSession session) {
-        session.setAttribute("userId", 18);
         return new ModelAndView("upload/upload");
     }
 
