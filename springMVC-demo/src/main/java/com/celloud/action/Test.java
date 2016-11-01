@@ -7,8 +7,10 @@ import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 
@@ -30,7 +32,45 @@ public class Test {
 		// } catch (IOException e) {
 		// e.printStackTrace();
 		// }
-		test5();
+		test7();
+	}
+
+	public static void test7() {
+		Integer i1 = 9090;
+		Integer i2 = 9090;
+		System.out.println(i1 == i2);
+		System.out.println(i1.equals(i2));
+	}
+
+	public static void test6() {
+		String[] arr1 = { "1", "2", "3", "4", "5" };
+		int[] arr2 = { 1, 2, 3, 4, 5 };
+		Object[] arr3 = new Object[10];
+
+		String notArr = "not array";
+
+		// 判断是否为数组
+		System.out.println(arr1.getClass().isArray());
+		System.out.println(arr2.getClass().isArray());
+		System.out.println(arr3.getClass().isArray());
+		System.out.println(notArr.getClass().isArray());
+
+		// 获取数组元素类型名称
+		System.out.println(arr1.getClass().getComponentType().getName());
+		System.out.println(arr2.getClass().getComponentType().getName());
+		System.out.println(arr3.getClass().getComponentType().getName());
+
+		System.out.println(arr2.getClass().isAssignableFrom(int[].class));
+		System.out.println(arr1.getClass().isAssignableFrom(String[].class));
+		System.out.println(arr3.getClass().isAssignableFrom(Object[].class));
+		Object[] os = (Object[]) arr1;
+		System.out.println(os.length);
+		for (Object o : os) {
+			System.out.print(o + "\t");
+		}
+		System.out.println();
+		System.out.println(new ArrayList<String>() instanceof Collection);
+		System.out.println(new HashSet<String>() instanceof Collection);
 	}
 
 	public static void test5() {

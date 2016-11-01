@@ -56,7 +56,6 @@ public class ReturnsAction {
         stu.setName("赵钱孙");
         return stu;
     }
-
     @RequestMapping("index6")
     @ResponseBody
     public Student index6() {

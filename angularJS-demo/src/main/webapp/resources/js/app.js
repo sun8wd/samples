@@ -1,5 +1,6 @@
 'use strict';
 
 define([ 'angular' ], function(angular) {
-	return angular.module('celloudApp', [ 'ngRoute','ngResource' ]);
+	var celloudApp = angular.module('celloudApp', [ 'ngRoute','ngResource' ]);
+	return celloudApp;
 });

@@ -7,7 +7,7 @@
 define([ 'app' ], function(app) {
 	return app.config(function($routeProvider) {
 		$routeProvider.when('/view1', {
-			templateUrl:'view1.jsp'
+			templateUrl:'view1.jsp',
 		});
 	});
 });

@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var uploader = new plupload.Uploader({
 		runtimes : 'html5,flash,silverlight,html4',
 		browse_button : 'uploadBtn',
-		url : contextPath+"/box/upload",
+		url : "http://localhost:9090/box/upload",
 		// Maximum file size
 		chunk_size : '1mb',
 		// Specify what files to browse for
@@ -66,9 +66,9 @@ $(document).ready(function() {
 			$fileDom.append($('<td class="state" align="center">等待上传</td>'));
 			$("#uploader").append($fileDom);
 			var params = {"size":item.size,"lastModifiedDate":item.lastModifiedDate,"name":item.name};
-			$.get(contextPath+"/box/checkBreakpoints",params,function(data){
-				if(data.loaded){
-					item.loaded = data.loaded;
+			$.get("http://localhost:9090/box/checkBreakpoints",params,function(data){
+				if(data.data){
+					item.loaded = data.data;
 					$("#" + item.id +" .percent").html((item.loaded/item.size).toFixed(2)*100+"%");
 				}
 			});
@@ -82,7 +82,7 @@ $(document).ready(function() {
 		if(res.md5){
 			$("#" + file.id +" .md5").html(res.md5);
 		}
-		if(res.id){
+		if(res.success){
 			var $state = $("#"+file.id+" .state");
 			$state.attr("title","正在从盒子往远程服务器同步");
 			$state.html("同步中");
@@ -93,12 +93,11 @@ $(document).ready(function() {
 		}
 	});
 	uploader.bind("BeforeUpload", function(uploader, file) {
-		 uploader.setOption("multipart_params",{"size":file.size,"lastModifiedDate":new Date(file.lastModifiedDate)});
+		 uploader.setOption("multipart_params",{"size":file.size,"lastModifiedDate":new Date(file.lastModifiedDate),"userId":12});
 	});
 	uploader.bind("Error", function(uploader, error) {
 		 if(error.code=='-602'){
 			 alert("当前队列已存在文件【"+error.file.name+"】，请勿重复添加！");
 		 }
 	});
-	
 });

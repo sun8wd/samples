@@ -67,6 +67,11 @@
 					</li>
 				</ul>
 			</li>
+			<li class="<%="chat".equals(nav) ? "active" : ""%>">
+				<a href="<%=request.getContextPath()%>/chat">
+					<i class="glyphicon glyphicon-grain"></i> UI-Route
+				</a>
+			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
