@@ -8,7 +8,7 @@
 
 ### angularJS-demo   
 
-预研angularJS技术点的示例项目
+预研angularJS技术点的示例项目  
    
 angularJS版本：1.5.8
 
