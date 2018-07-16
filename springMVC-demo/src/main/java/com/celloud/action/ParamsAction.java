@@ -1,5 +1,6 @@
 package com.celloud.action;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +16,14 @@ import com.celloud.model.User;
 @Controller
 @RequestMapping("/params")
 public class ParamsAction {
+	@RequestMapping("/date")
+	public ModelAndView index(Date date) {
+		System.out.println(date);
+		ModelAndView mv = new ModelAndView("params");
+		mv.addObject("params", date);
+		return mv;
+	}
+
 	/**
 	 * 基本类型参数传递
 	 * 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
@@ -38,7 +37,14 @@
 			</list>
 		</property>
 	</bean>
-
+	<bean id="yamlMap" class="org.springframework.beans.factory.config.YamlMapFactoryBean">
+		<property name="resources">
+			<list>
+				<value>classpath:alimq.yaml</value>
+			</list>
+		</property>
+		<property name="resolutionMethod" value="FIRST_FOUND" />
+	</bean>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${driver}" />
 		<property name="url" value="${url}" />
@@ -126,21 +132,18 @@
 	</aop:config>
 
 	<!-- 定义mongo对象，对应的是mongodb官方jar包中的Mongo，replica-set设置集群副本的ip地址和端口 -->
-	<!-- <mongo:mongo id="mongo" replica-set="${mongo.hostport}"> 一些连接属性的设置 <mongo:options threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}" 
-		connect-timeout="${mongo.connectTimeout}" max-wait-time="${mongo.maxWaitTime}" auto-connect-retry="${mongo.autoConnectRetry}" 
-		socket-keep-alive="${mongo.socketKeepAlive}" socket-timeout="${mongo.socketTimeout}" slave-ok="${mongo.slaveOk}" write-number="1" 
-		write-timeout="0" write-fsync="true" /> </mongo:mongo> <mongo:db-factory dbname="database" mongo-ref="mongo" /> <bean id="mongoTemplate" 
-		class="org.springframework.data.mongodb.core.MongoTemplate"> <constructor-arg ref="mongo" /> <constructor-arg name="databaseName" 
-		value="${mongo.database}" /> </bean> -->
+	<!-- <mongo:mongo id="mongo" replica-set="${mongo.hostport}"> 一些连接属性的设置 <mongo:options threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}" connect-timeout="${mongo.connectTimeout}" 
+		max-wait-time="${mongo.maxWaitTime}" auto-connect-retry="${mongo.autoConnectRetry}" socket-keep-alive="${mongo.socketKeepAlive}" socket-timeout="${mongo.socketTimeout}" slave-ok="${mongo.slaveOk}" write-number="1" 
+		write-timeout="0" write-fsync="true" /> </mongo:mongo> <mongo:db-factory dbname="database" mongo-ref="mongo" /> <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> <constructor-arg 
+		ref="mongo" /> <constructor-arg name="databaseName" value="${mongo.database}" /> </bean> -->
 
 	<bean id="mongoServerAddress" class="com.mongodb.ServerAddress">
 		<constructor-arg value="${mongo.host}" />
 		<constructor-arg value="${mongo.port}" />
 	</bean>
 	<!-- 如果没有启用mongodb的用户验证，可不使用此配置 -->
-	<!-- <bean id="mongoCredential" class="com.mongodb.MongoCredential" factory-method="createCredential"> 构造Credential的方法的参数，顺序不能改变 
-		<constructor-arg value="${mongo.username}" /> <constructor-arg value="${mongo.database}" /> <constructor-arg value="${mongo.password}" 
-		/> </bean> -->
+	<!-- <bean id="mongoCredential" class="com.mongodb.MongoCredential" factory-method="createCredential"> 构造Credential的方法的参数，顺序不能改变 <constructor-arg value="${mongo.username}" /> <constructor-arg value="${mongo.database}" 
+		/> <constructor-arg value="${mongo.password}" /> </bean> -->
 	<bean id="mongoClient" class="com.mongodb.MongoClient" destroy-method="close">
 		<constructor-arg ref="mongoServerAddress" />
 		<!-- <constructor-arg> <list> <ref bean="mongoCredential" /> </list> </constructor-arg> -->
@@ -153,7 +156,7 @@
 	<!-- shiro权限管理相关配置 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login"/>
+		<property name="loginUrl" value="/login" />
 		<property name="filterChainDefinitions">
 			<value>
 				/js/** = anon

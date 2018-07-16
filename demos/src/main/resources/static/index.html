@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<style>
+body {
+	font-size: 22px;
+}
+
+input {
+	height: 24px;
+	font-size: 22px;
+	padding-left: 10px;
+}
+
+li {
+	list-style: none;
+	margin-bottom: 20px;
+}
+
+button {
+	font-size: 20px;
+}
+</style>
+</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="customersCtrl">
+		<ul>
+			<li>
+				<label>&nbsp;&nbsp;&nbsp;ID&nbsp;&nbsp;&nbsp;：</label>
+				<label>
+					<input type="text" name="id" ng-model="user.id">
+				</label>
+			</li>
+			<li>
+				<label>用户名：</label>
+				<label>
+					<input type="text" name="username" ng-model="user.username">
+				</label>
+			</li>
+			<li>
+				<label>密&nbsp;&nbsp;&nbsp;码：</label>
+				<label>
+					<input type="text" name="password2" ng-model="user.password">
+				</label>
+			</li>
+			<li>
+				<label>手机号：</label>
+				<label>
+					<input type="text" name="phone" ng-model="user.phone">
+				</label>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<button ng-click="postForm()">postForm</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button ng-click="postBody()">postBody</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button ng-click="postParam()">postParam</button>
+			</li>
+			<li>
+				<button ng-click="create()">创建</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button ng-click="update()">修改</button>
+			</li>
+		</ul>
+	</div>
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('customersCtrl', function($scope, $http) {
+			$scope.user = {
+				"username" : "lihh",
+			};
+			$scope.postForm = function() {
+				$http({
+					url : "http://localhost:8080/login2",
+					method : "post",
+					data : $scope.user,
+					headers : {
+						"Content-Type" : "application/json"
+					}
+				}).success(function(response) {
+					alert(JSON.stringify(response));
+				});
+			};
+			$scope.postBody = function() {
+				$http({
+					url : "http://localhost:8080/login3",
+					method : "post",
+					data : $scope.user
+				}).success(function(response) {
+					alert(JSON.stringify(response));
+				});
+			};
+			$scope.postParam = function() {
+				$http({
+					url : "http://localhost:8080/login2",
+					method : "post",
+					params : $scope.user
+				}).success(function(response) {
+					alert(JSON.stringify(response));
+				});
+			};
+			$scope.create = function() {
+				$http({
+					url : "http://localhost:8080/users/",
+					method : 'post',
+					data : $scope.user
+				}).success(function(response) {
+					alert("创建成功：\n" + JSON.stringify(response, null, 4));
+				}).error(function(response) {
+					alert("创建失败：\n" + JSON.stringify(response, null, 4));
+					console.log(response);
+				});
+			}
+			$scope.update = function() {
+				$http({
+					url : "http://localhost:8080/users/" + ($scope.user.id || ''),
+					method : 'put',
+					data : $scope.user
+				}).success(function(response) {
+					alert("修改成功：\n" + JSON.stringify(response, null, 4));
+				}).error(function(response) {
+					alert("修改失败：\n" + JSON.stringify(response, null, 4));
+					console.log(response);
+				});
+			}
+		});
+	</script>
+
+</body>
+</html>

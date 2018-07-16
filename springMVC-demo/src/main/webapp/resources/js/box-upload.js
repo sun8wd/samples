@@ -100,4 +100,21 @@ $(document).ready(function() {
 			 alert("当前队列已存在文件【"+error.file.name+"】，请勿重复添加！");
 		 }
 	});
+	$("#startUploadTest").click(function(){
+		$.getJSON("http://192.168.22.51:8080/celloud/api/report/test?callback=?",function(data){
+			alert(JSON.stringify(data));
+		});
+		 $.ajax({
+             type: "get",
+             url: "http://192.168.22.51:8080/celloud/api/report/test",
+             dataType: "jsonp",
+             jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+             success: function(data){
+                 alert(JSON.stringify(data));
+             },
+             error: function(){
+                 alert('fail');
+             }
+         });
+	});
 });

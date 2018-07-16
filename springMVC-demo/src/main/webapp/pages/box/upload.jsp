@@ -14,8 +14,7 @@
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -32,16 +31,17 @@
 					</a>
 				</li>
 				<li class="">
-                    <a href="<%=request.getContextPath()%>/box/list">
-                        <i class="glyphicon glyphicon-th-list"></i> List
-                    </a>
-                </li>
+					<a href="<%=request.getContextPath()%>/box/list">
+						<i class="glyphicon glyphicon-th-list"></i> List
+					</a>
+				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<a href="<%=request.getContextPath()%>/box">
 						<i class="glyphicon glyphicon-user"></i>
-						<shiro:principal />celloud
+						<shiro:principal />
+						celloud
 					</a>
 				</li>
 			</ul>
@@ -80,6 +80,10 @@
 						<button type="button" class="btn btn-default" aria-label="add file" id="startUpload">
 							<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
 							开始上传
+						</button>
+						<button type="button" class="btn btn-default" aria-label="add file" id="startUploadTest">
+							<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+							呵呵哒
 						</button>
 					</div>
 				</div>

@@ -1,0 +1,14 @@
+{
+	"taskId":"1",
+	"appCode":"rocky",
+	"node":"web|api|task|perl|report",
+	"status":"continue|finish|error",
+	"message":"",
+	"timestamp":"",
+	"variables":{
+		"variable_1":"",
+		"variable_2":"",
+		"variable_3":"",
+		"variable_4":""
+	}
+}
