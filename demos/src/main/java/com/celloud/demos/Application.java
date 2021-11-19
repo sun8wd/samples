@@ -18,7 +18,7 @@ public class Application implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication application = new SpringApplication(Application.class);
 		application.addListeners(new ApplicationPidFileWriter());
-		application.run(args);
+		application.run(args); 
 		logger.info("Application is Running ...");
 	}
 
